@@ -389,6 +389,13 @@ app.use('/api/packages', packageRoutes);
 app.use('/api/auth', authRoutes);
 
 // ================================================
+// 🚚 IMPORTAR NUEVAS RUTAS DE GESTIÓN
+// ================================================
+const shipmentRoutes = require('./routes/shipments');
+
+app.use('/api/shipments', shipmentRoutes);
+
+// ================================================
 // 🧪 RUTAS DE PRUEBA
 // ================================================
 app.get('/', (req, res) => {
@@ -402,12 +409,15 @@ app.get('/', (req, res) => {
       'Login automático después de verificación ✅',
       'Token temporal OPCIONAL ✅',
       'Sistema de paquetes 📦',
-      'Gestión de usuarios 👥'
+      'Gestión de usuarios 👥',
+      'Gestión de envíos 🚚',
+      'Reportes analíticos 📊'
     ],
     endpoints: {
       auth: '/api/auth',
       users: '/api/users',
       packages: '/api/packages',
+      shipments: '/api/shipments',
       verifyEmail: '/api/verify-email/:token',
       resendVerification: '/api/resend-verification',
       sendToken: '/api/send-token',
@@ -424,7 +434,9 @@ app.get('/api/health', (req, res) => {
     project: 'Logística Segura Urabá',
     emailService: 'SMTP Configurado',
     verificationSystem: 'Activo ✅',
-    tokenSystem: 'Sesiones temporales ✅'
+    tokenSystem: 'Sesiones temporales ✅',
+    packageSystem: 'Activo 📦',
+    shipmentSystem: 'Activo 🚚'
   });
 });
 
@@ -463,7 +475,11 @@ app.use((req, res) => {
       'POST /api/verify-token',
       'GET /api/verify-email/:token',
       'POST /api/resend-verification',
-      'GET /api/auth/me'
+      'GET /api/auth/me',
+      'GET /api/packages',
+      'POST /api/packages/register',
+      'GET /api/shipments/reports',
+      'GET /api/shipments/dashboard-metrics'
     ]
   });
 });
@@ -475,4 +491,7 @@ app.listen(PORT, () => {
   console.log(`🔐 Login corregido - usando password_hash ✅`);
   console.log(`🔑 Token temporal con sesiones: ACTIVADO ✅`);
   console.log(`🔄 Limpieza de sesiones: ACTIVADA ✅`);
+  console.log(`📦 Sistema de paquetes: ACTIVADO ✅`);
+  console.log(`🚚 Sistema de envíos: ACTIVADO ✅`);
+  console.log(`📊 Sistema de reportes: ACTIVADO ✅`);
 });
